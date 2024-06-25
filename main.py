@@ -96,10 +96,14 @@ def updatebord(tern):
  
 
 def win():
-    # some function 
-    return False
+    result = rowchack(inputbord[0]) or rowchack(inputbord[1]) or rowchack(inputbord[2]) and dignalchack()
+    return result
 
 
+def rowchack(list):
+    return list[0]==list[1]==list[2] and bool(list[0].strip())
+def dignalchack():
+    return (inputbord[0][0]==inputbord[1][1]==inputbord[2][2] or inputbord[2][0]==inputbord[1][1]==inputbord[0][2]) and bool(inputbord[0][0].strip())
 
 
 
