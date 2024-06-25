@@ -16,6 +16,7 @@ def start():
 
     else:
         print("Thank you for playing")
+        exit(0)
 
 # Display Bord function
 def display(list):
