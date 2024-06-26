@@ -1,18 +1,26 @@
 #Start Function
 
 def start():
+
+    
     print("Do tou want to start new game")
     enter = input("press y or n : " )
-    
     if enter == "y" or enter == "Y":
         p1=True
         for x in range (0,9):
             updatebord(p1)
             p1 = not p1
+            if win():
+                break
         
         if not win():
             print("No One Win this Match")
-            start()
+           
+
+        global inputbord 
+        inputbord= emptyBord()
+        display(inputbord)
+        start()
 
     else:
         print("Thank you for playing")
@@ -23,7 +31,7 @@ def display(list):
     for ele in list:
         print(ele)
     
-    
+
 
 #position data
 row = [['1','2','3'],['4','5','6'],['7','8','9']]
@@ -32,6 +40,8 @@ row = [['1','2','3'],['4','5','6'],['7','8','9']]
 inputbord=[[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
 
 
+def emptyBord():
+    return [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
 
 
 print('Player 1 hase X and player 2 has O')
@@ -42,7 +52,7 @@ display(row)
 
 print('Hares your Tic Tak To bord')
 
-display(inputbord)
+
 
 # Get input from user function
 def userInput(p1tern):
@@ -92,19 +102,26 @@ def updatebord(tern):
             print("congratulation P1 win")
         else:
             print("congratulation P2 win")
-        start()
+        
     
  
 
 def win():
-    result = rowchack(inputbord[0]) or rowchack(inputbord[1]) or rowchack(inputbord[2]) and dignalchack()
+    result = rowchack(inputbord[0]) or rowchack(inputbord[1]) or rowchack(inputbord[2]) or dignalchack() or colchack() 
     return result
 
 
 def rowchack(list):
-    return list[0]==list[1]==list[2] and bool(list[0].strip())
+    return (list[0]==list[1]==list[2]) and bool(list[0].strip())
+def colchack():
+    return ((inputbord[0][0]==inputbord[1][0]==inputbord[2][0] and bool(inputbord[0][0].strip()))
+             or (inputbord[0][1]==inputbord[1][1]==inputbord[2][1] and bool(inputbord[1][1].strip()))
+               or (inputbord[0][2]==inputbord[1][2]==inputbord[2][2]) and bool(inputbord[2][2].strip()))
+
+
 def dignalchack():
-    return (inputbord[0][0]==inputbord[1][1]==inputbord[2][2] or inputbord[2][0]==inputbord[1][1]==inputbord[0][2]) and bool(inputbord[0][0].strip())
+    return ((inputbord[0][0]==inputbord[1][1]==inputbord[2][2])  and bool(inputbord[0][0].strip())
+            or (inputbord[2][0]==inputbord[1][1]==inputbord[0][2]) and bool(inputbord[0][2].strip()))
 
 
 
