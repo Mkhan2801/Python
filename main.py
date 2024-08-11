@@ -1,128 +1,33 @@
-#Start Function
+# Sort the list 
 
-def start():
+list1 = [5,3,4,6,1]
 
+# Method 1:
+sorted(list1)
+# Method 2:
+list1.sort()
+
+
+#create a Statement that will print out words that start with 's':
+
+st1 = 'Print only the words that start with s in this sentence'
+
+for word in st1.split():
+    if word[0] == 's':
+        print(word)
+
+
+#Go through the string below and if the length of a word is even print "even!"
+
+st2 = 'Print every word in this sentence that has an even number of letters'
+
+for word in st2.split():
+    if len(word)%2 == 0:
+        print(word+" <-- has an even length!")
+
+#checks whether a word or phrase is palindrome or not.
+
+def palindrome(s):
     
-    print("Do tou want to start new game")
-    enter = input("press y or n : " )
-    if enter == "y" or enter == "Y":
-        p1=True
-        for x in range (0,9):
-            updatebord(p1)
-            p1 = not p1
-            if win():
-                break
-        
-        if not win():
-            print("No One Win this Match")
-           
-
-        global inputbord 
-        inputbord= emptyBord()
-        display(inputbord)
-        start()
-
-    else:
-        print("Thank you for playing")
-        exit(0)
-
-# Display Bord function
-def display(list):
-    for ele in list:
-        print(ele)
-    
-
-
-#position data
-row = [['1','2','3'],['4','5','6'],['7','8','9']]
-
-#Game bord
-inputbord=[[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
-
-
-def emptyBord():
-    return [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
-
-
-print('Player 1 hase X and player 2 has O')
-
-print('Chosse a position to put your mark')
-
-display(row)
-
-print('Hares your Tic Tak To bord')
-
-
-
-# Get input from user function
-def userInput(p1tern):
-
-    input_num = 'Wrong'
-
-    while not input_num in range(1,10) and not win():
-
-        if p1tern :
-            input_num =  int(input("Palyer 1 select your position: " ))
-        else:
-            input_num =  int(input("Palyer 2 select your position: " ))
-
-        if not input_num in range(1,10):
-            print("Plese enter a valed input")
-
-    return input_num
-
-
-
-# update Bord function 
-def updatebord(tern):
-    
-    
-    if tern:
-        input = userInput(tern)
-        text = "X"
-    
-    else:
-        input = userInput(tern)
-        text = "O"
-
-    input = input-1
-    index = input%3
-    row = int(input/3)
-    if (inputbord[row][index] == ' '):
-        inputbord[row][index] = text
-        display(inputbord)
-        
-    else:
-        print("Tis posiition is all ready filled")
-        display(inputbord)
-        updatebord(tern)
-
-    if win():
-        if tern:
-            print("congratulation P1 win")
-        else:
-            print("congratulation P2 win")
-        
-    
- 
-
-def win():
-    result = rowchack(inputbord[0]) or rowchack(inputbord[1]) or rowchack(inputbord[2]) or dignalchack() or colchack() 
-    return result
-
-
-def rowchack(list):
-    return (list[0]==list[1]==list[2]) and bool(list[0].strip())
-def colchack():
-    return ((inputbord[0][0]==inputbord[1][0]==inputbord[2][0] and bool(inputbord[0][0].strip()))
-             or (inputbord[0][1]==inputbord[1][1]==inputbord[2][1] and bool(inputbord[1][1].strip()))
-               or (inputbord[0][2]==inputbord[1][2]==inputbord[2][2]) and bool(inputbord[2][2].strip()))
-
-
-def dignalchack():
-    return ((inputbord[0][0]==inputbord[1][1]==inputbord[2][2])  and bool(inputbord[0][0].strip())
-            or (inputbord[2][0]==inputbord[1][1]==inputbord[0][2]) and bool(inputbord[0][2].strip()))
-
-
-
-start()
+    s = s.replace(' ','') # This replaces all spaces ' ' with no space ''. (Fixes issues with strings that have spaces)
+    return s == s[::-1]   # Check through slicing
